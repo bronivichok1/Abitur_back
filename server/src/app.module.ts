@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
+import { FilesModule } from './files/files.module';
 import { ConfigModule,ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [ UserModule, FilesModule,
@@ -23,7 +23,7 @@ import { FilesModule } from './files/files.module';
       }),
       inject:[ConfigService],
 }),
-    FilesModule],
+],
   controllers: [AppController],
   providers: [AppService],
 })

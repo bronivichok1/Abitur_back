@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {File} from 'src/files/entities/file.entity'
+
 
 @Entity()
 export class User {
@@ -64,5 +66,7 @@ export class User {
     createAt:Date;
     @UpdateDateColumn()
     updateAt:Date;
+    @OneToMany(()=>File,(File)=>File.user)
+    Files:File[];
 
 }
