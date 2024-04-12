@@ -1,5 +1,7 @@
+import { IsEmail } from "class-validator";
+
 export class CreateUserDto {
-    id:string;
+    id:number;
     name: string;
 	surname: string;
 	surname_info:string;
@@ -12,12 +14,13 @@ export class CreateUserDto {
 	date_of_expiry:string;
 	settlement_name:string;
 	mobile_tel:string;
+	@IsEmail()
 	email:string;
 	edu_date_of_issue:string;
 	edu_serial_number:string;
 	edu_name:string;
-	sex:string;
-	country:string;
+	sex:number;
+	country:number;
 	DD:string;
 	religion:string;
 	DataYourPeople:string;
@@ -28,4 +31,5 @@ export class CreateUserDto {
 	HostelLive:string;
 	numberNational:string;
 	pref_faculty:string;
+	Files:File[];
 }

@@ -1,17 +1,59 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+
+    ){}
+  async create(createUserDto: CreateUserDto) {
+    const existUser=await this.userRepository.findOne({
+      where:{
+        number:createUserDto.number,
+      }
+    })
+    if(existUser) throw new BadRequestException('This passport number have in base, use editing')
+
+    const user=await this.userRepository.save({
+      name: createUserDto.name,
+      surname: createUserDto.surname,
+      surname_info: createUserDto.surname_info,
+      date_of_birth: createUserDto.date_of_birth,
+      citizenship: createUserDto.citizenship,
+      serial:createUserDto.serial,
+      number:createUserDto.number,
+      PlaceOfIssue:createUserDto.PlaceOfIssue,
+      date_of_issue:createUserDto.date_of_issue,
+      date_of_expiry:createUserDto.date_of_expiry,
+      settlement_name:createUserDto.settlement_name,
+      mobile_tel:createUserDto.mobile_tel,
+      email:createUserDto.email,
+      edu_date_of_issue:createUserDto.edu_date_of_issue,
+      edu_serial_number:createUserDto.edu_serial_number,
+      edu_name:createUserDto.edu_name,
+      sex:createUserDto.sex,
+      country:createUserDto.country,
+      DD:createUserDto.DD,
+      religion:createUserDto.religion,
+      DataYourPeople:createUserDto.DataYourPeople,
+      NameSurname:createUserDto.NameSurname,
+      PhoneRepresantative:createUserDto.PhoneRepresantative,
+      country_pass:createUserDto.country_pass,
+      NatPassw:createUserDto.NatPassw,
+      HostelLive:createUserDto.HostelLive,
+      numberNational:createUserDto.numberNational,
+      pref_faculty:createUserDto.pref_faculty,
+      Files:createUserDto.Files
+    })
     return 'This action adds a new user';
-  }
 
-  findAll() {
-    return `This action returns all user`;
   }
-
+  /*
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }
@@ -22,5 +64,5 @@ export class UserService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
-  }
+  }*/
 }

@@ -66,7 +66,7 @@ export class User {
     createAt:Date;
     @UpdateDateColumn()
     updateAt:Date;
-    @OneToMany(()=>File,(File)=>File.user)
+    @OneToMany(()=>File,(File)=>File.user,{onDelete:'CASCADE'})
     Files:File[];
 
 }
