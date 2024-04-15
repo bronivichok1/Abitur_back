@@ -26,10 +26,10 @@ export class CreateUserDto {
 	DataYourPeople:string;
 	NameSurname:string;
 	PhoneRepresantative:string;
-	country_pass:string;
+	country_pass:number;
 	NatPassw:string;
 	HostelLive:string;
 	numberNational:string;
-	pref_faculty:string;
-	Files:File[];
+	pref_faculty:number;
+	Files:string;
 }

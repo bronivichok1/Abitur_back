@@ -8,7 +8,7 @@ export class File {
     id:number;
     @Column()
     FLink:string; 
-    @ManyToOne(()=>User,(user)=>user.Files)
+    @ManyToOne(()=>User,(user)=>user.file)
     @JoinColumn({name:'user_id'})
     user:User;
 }

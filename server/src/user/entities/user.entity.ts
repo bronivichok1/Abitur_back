@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {File} from 'src/files/entities/file.entity'
 
 
@@ -62,11 +62,7 @@ export class User {
 	numberNational:string;
     @Column()
 	pref_faculty:number;
-    @CreateDateColumn()
-    createAt:Date;
-    @UpdateDateColumn()
-    updateAt:Date;
-    @OneToMany(()=>File,(File)=>File.user,{onDelete:'CASCADE'})
-    Files:File[];
+    @OneToMany(()=>File,(file)=>file.user,{onDelete:'CASCADE'})
+    file:File[];
 
 }
