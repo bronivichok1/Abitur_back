@@ -31,5 +31,5 @@ export class CreateUserDto {
 	HostelLive:string;
 	numberNational:string;
 	pref_faculty:number;
-	Files:string;
+	file:string;
 }

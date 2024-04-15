@@ -15,6 +15,7 @@ export class UserService {
     const existUser=await this.userRepository.findOne({
       where:{
         number:createUserDto.number,
+        date_of_expiry:createUserDto.date_of_expiry
       },
     })
     if(existUser) throw new BadRequestException('This passport number have in base, use editing')
@@ -48,7 +49,7 @@ export class UserService {
       HostelLive:createUserDto.HostelLive,
       numberNational:createUserDto.numberNational,
       pref_faculty:createUserDto.pref_faculty,
-      Files:createUserDto.Files
+      File:createUserDto.file,
     })
     return {user};
 
