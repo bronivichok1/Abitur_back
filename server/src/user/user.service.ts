@@ -4,12 +4,13 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-
+    /*private readonly jwtService:JwtService*/
     ){}
   async create(createUserDto: CreateUserDto) {
     const existUser=await this.userRepository.findOne({
@@ -51,7 +52,8 @@ export class UserService {
       pref_faculty:createUserDto.pref_faculty,
       File:createUserDto.file,
     })
-    return {user};
+    /*const token= this.jwtService.sign({number:createUserDto.number})*/
+    return {user/*,token*/};
 
   }
 
