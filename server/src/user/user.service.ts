@@ -65,6 +65,7 @@ export class UserService {
         date_of_expiry:date_of_expiry,
       }});
   }
+
 /*
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;

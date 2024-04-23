@@ -1,14 +1,56 @@
-import { Controller,HttpCode, Query,UploadedFiles,UseInterceptors ,Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller,HttpCode, Query,UploadedFiles,UseInterceptors ,Get, Post, Body, Patch, Param, Delete, UploadedFile } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
-import { FilesInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import * as fs from 'fs';
+import {rimraf} from 'rimraf'
 
 @Controller('files')
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
+  @Post('')
+  @UseInterceptors(FilesInterceptor('file', 15, {
+      storage: diskStorage({
+          destination: (req, file, cb) => {
+              // Получение данных из JSON тела запроса
+              const { number, date_of_expiry } = req.body;
+              const folderName = number + date_of_expiry;
 
-  @Post()
+              // Проверка наличия директории, и, если отсутствует, создание новой
+              const dir = `./static/default/${folderName}`;
+
+              if (!fs.existsSync(dir)) {
+                  fs.mkdirSync(dir);
+              }
+
+             
+              cb(null, dir);
+          },
+          filename: (req, file, cb) => {
+              const name = file.originalname.split('.')[0];
+              const fileExtension = file.originalname.split('.')[1];
+              const newFileName = name.split(" ").join('_') + '_' + Date.now() + '.' + fileExtension;
+
+              cb(null, newFileName);
+          }
+      }),
+      fileFilter: (req, file, cb) => {
+          if (!file.originalname.match(/\.(jpg|jpeg|png|gif|pdf)$/)) {
+              return cb(null, false);
+          }
+          cb(null, true);
+      }
+  }))
+  UploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Body() requestBody: any) {
+      // Логика обработки загруженных файлов и данных из requestBody
+
+      // Дополнительная логика после загрузки файлов
+
+      // Возвращение результата, если необходимо
+  }
+    /*
   @UseInterceptors(FilesInterceptor('file'))
   async uploadFile(
     @UploadedFiles() files: Express.Multer.File[],
@@ -17,7 +59,7 @@ export class FilesController {
     const newFiles=await this.filesService.filterFiles(files);
     return this.filesService.saveFiles(newFiles, folder)
   }
- /* create(@Body() createFileDto: CreateFileDto) {
+  create(@Body() createFileDto: CreateFileDto) {
     return this.filesService.create(createFileDto);
   }
 

@@ -25,6 +25,7 @@ import { AuthModule } from './auth/auth.module';
       inject:[ConfigService],
 }),
     AuthModule,
+    
 ],
   controllers: [AppController],
   providers: [AppService],

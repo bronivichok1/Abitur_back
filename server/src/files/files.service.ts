@@ -2,14 +2,15 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import {access, mkdir, writeFile} from 'fs/promises'
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
-import { MFile } from './mfile.class';
 import {v4} from 'uuid';
 import { join } from 'path';
 import sharp from 'sharp';
-import { FileResponse } from './file.interface';
+
 
 @Injectable()
 export class FilesService {
+
+
   /*create(createFileDto: CreateFileDto) {
     return 'This action adds a new file';
   }
@@ -28,7 +29,7 @@ export class FilesService {
 
   remove(id: number) {
     return `This action removes a #${id} file`;
-  }*/
+  }
   async saveFiles(files:MFile[], folder='default'){
     const uploadFolder=join(__dirname,'..','..','static',folder);
     try{
@@ -38,6 +39,7 @@ export class FilesService {
       await mkdir(uploadFolder,{recursive:true});
     }
 
+  
     const res: FileResponse[]=await Promise.all(
       files.map(
         async(file):Promise<FileResponse>=>{
@@ -93,5 +95,5 @@ export class FilesService {
     );
       
         return newFiles;
-  }
+  }*/
 }

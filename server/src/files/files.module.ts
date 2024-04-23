@@ -8,9 +8,6 @@ import {ServeStaticModule} from '@nestjs/serve-static'
 @Module({
   controllers: [FilesController],
   providers: [FilesService],
-  imports:[ServeStaticModule.forRoot({
-    rootPath: join(__dirname, '..','..','/static'),
-    serveRoot:'/static',
-  })]
+  imports:[]
 })
 export class FilesModule {}
