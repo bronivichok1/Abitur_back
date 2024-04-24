@@ -15,8 +15,8 @@ export class FilesController {
       storage: diskStorage({
           destination: (req, file, cb) => {
               // Получение данных из JSON тела запроса
-              const { number, date_of_expiry } = req.body;
-              const folderName = number + date_of_expiry;
+              //const { nameFolder } = req.body.name;
+              const folderName = /*nameFolder;*/req.body.name;
 
               // Проверка наличия директории, и, если отсутствует, создание новой
               const dir = `./static/default/${folderName}`;
@@ -25,7 +25,6 @@ export class FilesController {
                   fs.mkdirSync(dir);
               }
 
-             
               cb(null, dir);
           },
           filename: (req, file, cb) => {
@@ -36,6 +35,8 @@ export class FilesController {
               cb(null, newFileName);
           }
       }),
+
+      
       fileFilter: (req, file, cb) => {
           if (!file.originalname.match(/\.(jpg|jpeg|png|gif|pdf)$/)) {
               return cb(null, false);
@@ -44,11 +45,7 @@ export class FilesController {
       }
   }))
   UploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Body() requestBody: any) {
-      // Логика обработки загруженных файлов и данных из requestBody
-
-      // Дополнительная логика после загрузки файлов
-
-      // Возвращение результата, если необходимо
+ 
   }
     /*
   @UseInterceptors(FilesInterceptor('file'))

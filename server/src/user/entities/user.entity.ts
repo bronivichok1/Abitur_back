@@ -62,6 +62,8 @@ export class User {
 	numberNational:string;
     @Column()
 	pref_faculty:number;
+    @Column()
+    nameFolder:string;
     @OneToMany(()=>File,(file)=>file.user,{onDelete:'CASCADE'})
     file:File[];
 

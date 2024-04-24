@@ -50,7 +50,7 @@ export class UserService {
       HostelLive:createUserDto.HostelLive,
       numberNational:createUserDto.numberNational,
       pref_faculty:createUserDto.pref_faculty,
-      File:createUserDto.file,
+      nameFolder:createUserDto.nameFolder,
     })
     /*const token= this.jwtService.sign({number:createUserDto.number})*/
     return {user/*,token*/};

@@ -31,5 +31,5 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 	HostelLive:string;
 	numberNational:string;
 	pref_faculty:number;
-	file:string;
+	nameFolder:string;
 }
