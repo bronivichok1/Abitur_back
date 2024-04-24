@@ -21,6 +21,7 @@ export class UserService {
     })
     if(existUser) throw new BadRequestException('This passport number have in base, use editing')
 
+    
     const user=await this.userRepository.save({
       name: createUserDto.name,
       surname: createUserDto.surname,
