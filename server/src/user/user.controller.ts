@@ -13,8 +13,9 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 /*
-  @Get()
+  @Post()
   findOne() {
     return this.userService.findOne();
-  }*/
+  }
+  */
 }

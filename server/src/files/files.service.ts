@@ -6,7 +6,6 @@ import {v4} from 'uuid';
 import { join } from 'path';
 import sharp from 'sharp';
 
-
 @Injectable()
 export class FilesService {
 

@@ -1,18 +1,28 @@
-import { IsEmail } from "class-validator";
+import { IsEmail, IsNotEmpty } from "class-validator";
 
 export class CreateUserDto {
     id:number;
+	@IsNotEmpty()
     name: string;
+	@IsNotEmpty()
 	surname: string;
+	@IsNotEmpty()
 	surname_info:string;
+	@IsNotEmpty()
 	date_of_birth:string;
 	citizenship:string;
+	@IsNotEmpty()
 	serial:string;
+	@IsNotEmpty()
 	number:string;
+	@IsNotEmpty()
 	PlaceOfIssue:string;
+	@IsNotEmpty()
 	date_of_issue:string;
+	@IsNotEmpty()
 	date_of_expiry:string;
 	settlement_name:string;
+	@IsNotEmpty()
 	mobile_tel:string;
 	@IsEmail()
 	email:string;
@@ -20,9 +30,11 @@ export class CreateUserDto {
 	edu_serial_number:string;
 	edu_name:string;
 	sex:number;
+	@IsNotEmpty()
 	country:number;
 	DD:string;
 	religion:string;
+	@IsNotEmpty()
 	DataYourPeople:string;
 	NameSurname:string;
 	PhoneRepresantative:string;

@@ -11,8 +11,8 @@ export class AuthService {
         )
     {}
 
-    async validateUser(number: string, date_of_expiry: string): Promise<any> {
-        const user = await this.userService.findOne(number, date_of_expiry);
+    async validateUser(number: string, date_of_issue: string): Promise<any> {
+        const user = await this.userService.findOne(number, date_of_issue);
         if (user) {
             return user
         }        // TODO: Generate a JWT and return it here

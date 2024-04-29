@@ -16,7 +16,7 @@ export class UserService {
     const existUser=await this.userRepository.findOne({
       where:{
         number:createUserDto.number,
-        date_of_expiry:createUserDto.date_of_expiry
+        date_of_issue:createUserDto.date_of_issue
       },
     })
     if(existUser) throw new BadRequestException('This passport number have in base, use editing')
@@ -59,19 +59,19 @@ export class UserService {
   }
 
   
-  async findOne(number:string,date_of_expiry:string) {
+  async findOne(number:string,date_of_issue:string) {
     return await this.userRepository.findOne({
       where:{
         number:number,
-        date_of_expiry:date_of_expiry,
+        date_of_issue:date_of_issue,
       }});
   }
 
-/*
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
 
+  async update(updateUserDto: UpdateUserDto) {
+    return{ };
+  }
+/*
   remove(id: number) {
     return `This action removes a #${id} user`;
   }*/

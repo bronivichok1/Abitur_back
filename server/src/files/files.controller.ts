@@ -31,11 +31,9 @@ export class FilesController {
               const name = file.originalname.split('.')[0];
               const fileExtension = file.originalname.split('.')[1];
               const newFileName = name.split(" ").join('_') + '_' + Date.now() + '.' + fileExtension;
-
               cb(null, newFileName);
           }
       }),
-
       
       fileFilter: (req, file, cb) => {
           if (!file.originalname.match(/\.(jpg|jpeg|png|gif|pdf)$/)) {
