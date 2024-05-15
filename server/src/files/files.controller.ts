@@ -22,11 +22,12 @@ export class FilesController {
               const dir = `./static/default/${folderName}`;
 
               if (!fs.existsSync(dir)) {
-                  fs.mkdirSync(dir);
+                  fs.mkdirSync(dir); 
               }
 
               cb(null, dir);
           },
+          
           filename: (req, file, cb) => {
               const name = file.originalname.split('.')[0];
               const fileExtension = file.originalname.split('.')[1];
@@ -42,9 +43,11 @@ export class FilesController {
           cb(null, true);
       }
   }))
+  
   UploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Body() requestBody: any) {
  
   }
+
     /*
   @UseInterceptors(FilesInterceptor('file'))
   async uploadFile(

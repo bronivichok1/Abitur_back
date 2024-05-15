@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as bodyParser from 'body-parser';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,5 +10,11 @@ async function bootstrap() {
   app.use(bodyParser.json());
   app.use(bodyParser.raw());
   await app.listen(3001);
+  app.useGlobalPipes(
+    new ValidationPipe({
+      disableErrorMessages: true,
+      whitelist: true,
+      transform: true,
+    }),);
 }
 bootstrap();
