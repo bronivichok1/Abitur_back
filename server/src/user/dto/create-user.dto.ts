@@ -12,8 +12,6 @@ export class CreateUserDto {
 	date_of_birth:string;
 	citizenship:string;
 	@IsNotEmpty()
-	serial:string;
-	@IsNotEmpty()
 	number:string;
 	@IsNotEmpty()
 	PlaceOfIssue:string;

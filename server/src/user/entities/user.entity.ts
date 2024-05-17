@@ -17,8 +17,6 @@ export class User {
     @Column()
 	citizenship:string;
     @Column()
-	serial:string;
-    @Column()
 	number:string;
     @Column()
 	PlaceOfIssue:string;

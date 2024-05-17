@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { JwtService } from '@nestjs/jwt';
+/*import { JwtService } from '@nestjs/jwt';*/
 
 @Injectable()
 export class UserService {
@@ -28,7 +28,6 @@ export class UserService {
       surname_info: createUserDto.surname_info,
       date_of_birth: createUserDto.date_of_birth,
       citizenship: createUserDto.citizenship,
-      serial:createUserDto.serial,
       number:createUserDto.number,
       PlaceOfIssue:createUserDto.PlaceOfIssue,
       date_of_issue:createUserDto.date_of_issue,
