@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { iUser } from 'src/types/types';
@@ -17,7 +17,7 @@ export class AuthService {
             return user
         }        // TODO: Generate a JWT and return it here
         // instead of the user object
-        throw new BadRequestException('Number or data are incorrect')
+        throw new NotFoundException({error:'3'})
       }
 
 /*

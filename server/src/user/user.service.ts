@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,7 +19,7 @@ export class UserService {
         date_of_issue:createUserDto.date_of_issue
       },
     })
-    if(existUser) throw new BadRequestException('This passport number have in base, use editing')
+    if(existUser) throw new NotFoundException({error:'1'})
 
     
     const user=await this.userRepository.save({
@@ -72,7 +72,7 @@ export class UserService {
       where:{number},
     })
 
-    if(!user) throw new NotFoundException('User not found')
+    if(!user) throw new NotFoundException({error:'2'})
     return await this.userRepository.update(number,updateUserDto);
   }
 /*

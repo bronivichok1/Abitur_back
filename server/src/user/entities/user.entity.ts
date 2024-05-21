@@ -37,9 +37,9 @@ export class User {
     @Column()
 	edu_name:string;
     @Column()
-	sex:number;
+	sex:string;
     @Column()
-	country:number;
+	country:string;
     @Column()
 	DD:string;
     @Column()
@@ -51,7 +51,7 @@ export class User {
     @Column()
 	PhoneRepresantative:string;
     @Column()
-	country_pass:number;
+	country_pass:string;
     @Column()
 	NatPassw:string;
     @Column()
@@ -59,7 +59,7 @@ export class User {
     @Column()
 	numberNational:string;
     @Column()
-	pref_faculty:number;
+	pref_faculty:string;
     @Column()
     nameFolder:string;
     @OneToMany(()=>File,(file)=>file.user,{onDelete:'CASCADE'})

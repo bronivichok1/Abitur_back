@@ -29,19 +29,19 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 	edu_date_of_issue:string;
 	edu_serial_number:string;
 	edu_name:string;
-	sex:number;
+	sex:string;
 	@IsNotEmpty()
-	country:number;
+	country:string;
 	DD:string;
 	religion:string;
 	@IsNotEmpty()
 	DataYourPeople:string;
 	NameSurname:string;
 	PhoneRepresantative:string;
-	country_pass:number;
+	country_pass:string;
 	NatPassw:string;
 	HostelLive:string;
 	numberNational:string;
-	pref_faculty:number;
+	pref_faculty:string;
 	nameFolder:string;
 }
