@@ -2,6 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as bodyParser from 'body-parser';
 import { ValidationPipe } from '@nestjs/common';
+import { UserModule } from './user/user.module';
+import { FilesModule } from './files/files.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,7 +13,8 @@ async function bootstrap() {
   app.enableCors();
   app.use(bodyParser.json());
   app.use(bodyParser.raw());
-  await app.listen(3001);
+  const PORT=process.env.PORT;
+  await app.listen(PORT,'127.0.0.1');
   app.useGlobalPipes(
     new ValidationPipe({
       disableErrorMessages: true,
