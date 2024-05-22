@@ -1,5 +1,5 @@
 import { Entity,Column, JoinColumn,ManyToOne,PrimaryGeneratedColumn } from "typeorm";
-import {User} from 'src/user/entities/user.entity'
+import {UserData} from 'src/user/entities/user.entity'
 
 
 @Entity()
@@ -8,8 +8,8 @@ export class File {
     id:number;
     @Column()
     FLink:string; 
-    @ManyToOne(()=>User,(user)=>user.file)
+    @ManyToOne(()=>UserData,(user)=>user.file)
     @JoinColumn({name:'user_id'})
-    user:User;
+    user:UserData;
 }
 

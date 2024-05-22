@@ -3,7 +3,7 @@ import {File} from 'src/files/entities/file.entity'
 
 
 @Entity()
-export class User {
+export class UserData {
     @PrimaryGeneratedColumn()
     id:number;
     @Column()

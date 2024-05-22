@@ -2,14 +2,14 @@ import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundExc
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { UserData } from './entities/user.entity';
 import { Repository } from 'typeorm';
 /*import { JwtService } from '@nestjs/jwt';*/
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(UserData) private readonly userRepository: Repository<UserData>,
     /*private readonly jwtService:JwtService*/
     ){}
   async create(createUserDto: CreateUserDto) {
