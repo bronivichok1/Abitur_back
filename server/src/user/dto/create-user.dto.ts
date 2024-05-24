@@ -7,6 +7,10 @@ export class CreateUserDto {
 	@IsNotEmpty()
 	surname: string;
 	@IsNotEmpty()
+	namerus:string;
+	@IsNotEmpty()
+    surnamerus:string;
+	@IsNotEmpty()
 	surname_info:string;
 	@IsNotEmpty()
 	date_of_birth:string;

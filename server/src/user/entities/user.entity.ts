@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {File} from 'src/files/entities/file.entity'
+import { NotFoundException } from "@nestjs/common";
 
 
 @Entity()
@@ -10,6 +11,10 @@ export class UserData {
     name: string;
     @Column()
 	surname: string;
+    @Column()
+    namerus:string;
+    @Column()
+    surnamerus:string;
     @Column()
 	surname_info:string;
     @Column()

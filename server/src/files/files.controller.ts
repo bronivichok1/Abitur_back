@@ -1,23 +1,30 @@
-import { Controller,HttpCode, Query,UploadedFiles,UseInterceptors ,Get, Post, Body, Patch, Param, Delete, UploadedFile } from '@nestjs/common';
+import { Controller,HttpCode, Query,UploadedFiles,UseInterceptors ,Get, Post, Body, Patch, Param, Delete, UploadedFile, NotFoundException } from '@nestjs/common';
 import { FilesService } from './files.service';
-import { CreateFileDto } from './dto/create-file.dto';
-import { UpdateFileDto } from './dto/update-file.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as fs from 'fs';
 import {rimraf} from 'rimraf'
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UserData } from 'src/user/entities/user.entity';
 
 @Controller('files')
 export class FilesController {
-  constructor(private readonly filesService: FilesService) {}
-  @Post('')
+  constructor( private readonly filesService: FilesService){
+  }
+  @Post()
   @UseInterceptors(FilesInterceptor('file', 15, {
       storage: diskStorage({
-          destination: (req, file, cb) => {
+          destination: async (req, file, cb) => {
               // Получение данных из JSON тела запроса
               //const { nameFolder } = req.body.name;
-              const folderName = /*nameFolder;*/req.body.name;
-
+              //const folderName = FilesService.findUserIdByNumber(req.body.name);
+              const number=req.body.name;
+              const date_of_issue=req.body.data;
+               function ForFolder(number,date_of_issue){
+                return this.filesService.findByNumber(number,date_of_issue);
+              }
+              const folderName= ForFolder(number,date_of_issue)
               // Проверка наличия директории, и, если отсутствует, создание новой
               const dir = `./static/default/${folderName}`;
 
@@ -44,7 +51,7 @@ export class FilesController {
       }
   }))
   
-  UploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Body() requestBody: any) {
+  async UploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Body() requestBody: any) {
  
   }
 
@@ -81,3 +88,4 @@ export class FilesController {
     return this.filesService.remove(+id);
   }*/
 }
+
