@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
+  userService: any;
   constructor(
     @InjectRepository(UserData) private readonly userRepository: Repository<UserData>,
     /*private readonly jwtService:JwtService*/
@@ -54,9 +55,9 @@ export class UserService {
       pref_faculty:createUserDto.pref_faculty,
       nameFolder:createUserDto.nameFolder,
     })
-    //console.log(user)
+    console.log(user)
     /*const token= this.jwtService.sign({number:createUserDto.number})*/
-    return {user/*,token*/};
+    return user/*,token*/;
 
   }
 
@@ -80,6 +81,7 @@ export class UserService {
     if(!user) throw new NotFoundException({error:'2'})
     return await this.userRepository.update(number,updateUserDto);
   }
+
 /*
   remove(id: number) {
     return `This action removes a #${id} user`;
