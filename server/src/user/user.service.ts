@@ -32,6 +32,7 @@ export class UserService {
       date_of_birth: createUserDto.date_of_birth,
       citizenship: createUserDto.citizenship,
       number:createUserDto.number,
+      serialPass:createUserDto.serialPass,
       PlaceOfIssue:createUserDto.PlaceOfIssue,
       date_of_issue:createUserDto.date_of_issue,
       date_of_expiry:createUserDto.date_of_expiry,

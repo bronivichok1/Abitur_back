@@ -24,6 +24,8 @@ export class UserData {
     @Column()
 	number:string;
     @Column()
+    serialPass:string;
+    @Column()
 	PlaceOfIssue:string;
     @Column()
 	date_of_issue:string;

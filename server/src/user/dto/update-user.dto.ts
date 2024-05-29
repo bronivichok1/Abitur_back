@@ -19,6 +19,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 	citizenship:string;
 	@IsNotEmpty()
 	number:string;
+	serialPass:string;
 	@IsNotEmpty()
 	PlaceOfIssue:string;
 	@IsNotEmpty()
