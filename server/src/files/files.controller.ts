@@ -44,7 +44,7 @@ export class FilesController {
       }),
       
       fileFilter: (req, file, cb) => {
-          if (!file.originalname.match(/\.(jpg|jpeg|png|gif|pdf)$/)) {
+          if (!file.originalname.match(/\.(jpg|jpeg|pdf)$/)) {
               return cb(null, false);
           }
           cb(null, true);

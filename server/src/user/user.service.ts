@@ -14,14 +14,14 @@ export class UserService {
     /*private readonly jwtService:JwtService*/
     ){}
   async create(createUserDto: CreateUserDto) {
- /*   const existUser=await this.userRepository.findOne({
+   const existUser=await this.userRepository.findOne({
       where:{
         number:createUserDto.number,
         date_of_issue:createUserDto.date_of_issue
       },
     })
     if(existUser) throw new NotFoundException({error:'1'})
-*/
+
     
     const user=await this.userRepository.save({
       name: createUserDto.name,
@@ -73,14 +73,12 @@ export class UserService {
 
 
 
-  async update(number:string,updateUserDto: UpdateUserDto) {
-    const user=await this.userRepository.findOne({
-      where:{number},
-    })
-    
-
-    if(!user) throw new NotFoundException({error:'2'})
-    return await this.userRepository.update(number,updateUserDto);
+  async update(id:number,updateUserDto:UpdateUserDto) { 
+/*    const user=await this.userRepository.findOne({ 
+      where:{id:id}
+    });
+    if(!user) throw new NotFoundException({error:'2'}) */
+    return await this.userRepository.update(id,updateUserDto)
   }
 
 /*

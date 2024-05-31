@@ -10,7 +10,6 @@ export class CreateUserDto {
 	namerus:string;
 	@IsNotEmpty()
     surnamerus:string;
-	@IsNotEmpty()
 	surname_info:string;
 	@IsNotEmpty()
 	date_of_birth:string;
@@ -37,7 +36,6 @@ export class CreateUserDto {
 	country:string;
 	DD:string;
 	religion:string;
-	@IsNotEmpty()
 	DataYourPeople:string;
 	NameSurname:string;
 	PhoneRepresantative:string;
