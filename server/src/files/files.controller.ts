@@ -16,18 +16,26 @@ export class FilesController {
   @UseInterceptors(FilesInterceptor('file', 15, {
       storage: diskStorage({
           destination: async (req, file, cb) => {
-              // Получение данных из JSON тела запроса
-              //const { nameFolder } = req.body.name;
-              //const folderName = FilesService.findUserIdByNumber(req.body.name);
-              //const number=req.body.id;
-              //const date_of_issue=req.body.data;
-               /*function ForFolder(number,date_of_issue){
-                return this.filesService.findByNumber(number,date_of_issue);
-              }*/
+
               const folderName=req.body.name //ForFolder(number,date_of_issue)
               // Проверка наличия директории, и, если отсутствует, создание новой
               const dir = `./static/default/${folderName}`;
+              const fs = require('fs');
+              const oldFiles = req.body.oldFiles;
+              if(oldFiles){
+              // Получить список файлов в папке
+              const existingFiles = fs.readdirSync(dir);
+              
+              // Определить файлы для удаления
+              const filesToDelete = existingFiles.filter((file) => !oldFiles.includes(file));
+              
+              // Удалить файлы, которых нет в массиве oldFiles
+              filesToDelete.forEach((file) => {
+                const filePath = `${dir}/${file}`;
+                fs.unlinkSync(filePath); // Удалить файл
+              });
 
+            }
               if (!fs.existsSync(dir)) {
                   fs.mkdirSync(dir); 
               }
