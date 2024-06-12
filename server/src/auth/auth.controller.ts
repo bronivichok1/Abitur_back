@@ -1,4 +1,4 @@
-import { Controller, Post, UseGuards, Request,Get, Param, Res, BadRequestException, HttpException } from '@nestjs/common';
+import { Controller, Post, UseGuards, Request,Get, Param, Res} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -31,6 +31,7 @@ export class AuthController {
           }
       });
   }
+  
   /* Защищённый токином роут
   @UseGuards(JwtAuthGuard)
   @Get('profile')

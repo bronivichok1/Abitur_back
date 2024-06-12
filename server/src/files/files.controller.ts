@@ -1,4 +1,4 @@
-import { Controller,HttpCode, Query,UploadedFiles,UseInterceptors ,Get, Post, Body, Patch, Param, Delete, UploadedFile, NotFoundException } from '@nestjs/common';
+import { Controller,HttpCode, Query,UploadedFiles,UseInterceptors ,Get, Post, Body, Patch, Param, Delete, UploadedFile, NotFoundException, BadRequestException } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -7,6 +7,7 @@ import {rimraf} from 'rimraf'
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserData } from 'src/user/entities/user.entity';
+import  path from 'path';
 
 @Controller('files')
 export class FilesController {
@@ -21,21 +22,7 @@ export class FilesController {
               // Проверка наличия директории, и, если отсутствует, создание новой
               const dir = `./static/default/${folderName}`;
               const fs = require('fs');
-              const oldFiles = req.body.oldFiles;
-              if(oldFiles){
-              // Получить список файлов в папке
-              const existingFiles = fs.readdirSync(dir);
-              
-              // Определить файлы для удаления
-              const filesToDelete = existingFiles.filter((file) => !oldFiles.includes(file));
-              
-              // Удалить файлы, которых нет в массиве oldFiles
-              filesToDelete.forEach((file) => {
-                const filePath = `${dir}/${file}`;
-                fs.unlinkSync(filePath); // Удалить файл
-              });
-
-            }
+             
               if (!fs.existsSync(dir)) {
                   fs.mkdirSync(dir); 
               }
@@ -62,6 +49,19 @@ export class FilesController {
   
   async UploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Body() requestBody: any) {
  
+  }
+  @Post('delete/:nameFolder/:fileName') // Использование параметров маршрута для извлечения nameFolder и fileName
+  async deleteFile(@Param('nameFolder') nameFolder: string, @Param('fileName') fileName: string) {
+      const fileToDeletePath = `./static/default/${nameFolder}/${fileName}`;
+      const fs = require('fs');
+  
+      // Проверка наличия файла по указанному пути
+      if (fs.existsSync(fileToDeletePath)) {
+          fs.unlinkSync(fileToDeletePath); // Удалить файл
+          return true;
+      } else {
+          return BadRequestException;
+      }
   }
 
     /*
