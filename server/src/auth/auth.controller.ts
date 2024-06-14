@@ -32,6 +32,7 @@ export class AuthController {
       });
   }
   
+  
   /* Защищённый токином роут
   @UseGuards(JwtAuthGuard)
   @Get('profile')
