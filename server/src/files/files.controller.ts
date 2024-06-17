@@ -18,8 +18,7 @@ export class FilesController {
       storage: diskStorage({
           destination: async (req, file, cb) => {
 
-              const folderName=req.body.name //ForFolder(number,date_of_issue)
-              // Проверка наличия директории, и, если отсутствует, создание новой
+              const folderName=req.body.name
               const dir = `./static/default/${folderName}`;
               const fs = require('fs');
              
@@ -50,14 +49,13 @@ export class FilesController {
   async UploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Body() requestBody: any) {
  
   }
-  @Post('delete/:nameFolder/:fileName') // Использование параметров маршрута для извлечения nameFolder и fileName
+  @Post('delete/:nameFolder/:fileName') 
   async deleteFile(@Param('nameFolder') nameFolder: string, @Param('fileName') fileName: string) {
       const fileToDeletePath = `./static/default/${nameFolder}/${fileName}`;
       const fs = require('fs');
   
-      // Проверка наличия файла по указанному пути
       if (fs.existsSync(fileToDeletePath)) {
-          fs.unlinkSync(fileToDeletePath); // Удалить файл
+          fs.unlinkSync(fileToDeletePath); 
           return true;
       } else {
           return BadRequestException;

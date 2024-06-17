@@ -20,14 +20,13 @@ export class AuthController {
   async getFileNamesFromFolder(@Param('folderName') folderName: string, @Res() res: Response) {
       const directoryPath = './static/default/' + folderName + '/';
   
-      // Чтение файлов из указанной папки
       fs.readdir(directoryPath, (err, files) => {
           if (err) {
               console.log(err);
               res.status(500).json({ message: 'Ошибка при чтении файлов из указанной папки' });
           } else {
               const fileNames = files.map(file => file);
-              res.status(200).json({ fileNames: fileNames }); // Отправляем на фронтенд массив имен файлов
+              res.status(200).json({ fileNames: fileNames }); 
           }
       });
   }

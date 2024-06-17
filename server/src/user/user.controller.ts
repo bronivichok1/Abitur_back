@@ -19,10 +19,5 @@ export class UserController {
   ){ 
 return this.userService.update(+id,updateUserDto) 
   }
-/*
-  @Post()
-  findOne() {
-    return this.userService.findOne();
-  }
-  */
+
 }
