@@ -8,11 +8,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserData } from 'src/user/entities/user.entity';
 import  path from 'path';
+import slugify from 'slugify';
 
 @Controller('files')
 export class FilesController {
   constructor( private readonly filesService: FilesService){
   }
+  
   @Post()
   @UseInterceptors(FilesInterceptor('file', 15, {
       storage: diskStorage({
@@ -30,11 +32,16 @@ export class FilesController {
           },
           
           filename: (req, file, cb) => {
-              const name = file.originalname.split('.')[0];
-              const fileExtension = file.originalname.split('.')[1];
-              const newFileName = name.split(" ").join('_') + '_' + Date.now() + '.' + fileExtension;
-              cb(null, newFileName);
-          }
+            const iconv = require('iconv-lite');
+            const slugify = require('slugify');
+            const name = Buffer.from(file.originalname, 'latin1').toString('utf8');
+            const fileExtension = file.originalname.split('.').pop();
+            const timestamp = Date.now();
+            const sanitizedFileName = slugify(name, { lower: false }); 
+            const newFileName = `${sanitizedFileName}_${timestamp}.${fileExtension}`;
+            const utf8FileName = iconv.encode(newFileName, 'utf8');
+            cb(null, utf8FileName.toString());
+        }
       }),
       
       fileFilter: (req, file, cb) => {
