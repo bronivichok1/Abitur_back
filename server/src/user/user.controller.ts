@@ -19,5 +19,10 @@ export class UserController {
   ){ 
 return this.userService.update(+id,updateUserDto) 
   }
-
+  @Post('/drop/:id') 
+  delete( 
+    @Param('id') id:number,
+  ){ 
+return this.userService.delete(+id) 
+  }
 }

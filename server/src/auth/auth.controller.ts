@@ -22,8 +22,7 @@ export class AuthController {
   
       fs.readdir(directoryPath, (err, files) => {
           if (err) {
-              console.log(err);
-              res.status(500).json({ message: 'Ошибка при чтении файлов из указанной папки' });
+            res.status(200).json({ fileNames: null });
           } else {
               const fileNames = files.map(file => file);
               res.status(200).json({ fileNames: fileNames }); 

@@ -68,7 +68,30 @@ export class FilesController {
           return BadRequestException;
       }
   }
+  @Post('drop/:nameFolder') 
+  async deleteFolder(@Param('nameFolder') nameFolder: string) {
+    const folderPath = `./static/default/${nameFolder}`;
 
+    if (fs.existsSync(folderPath)) {
+        try {
+            fs.promises.rm(folderPath, { recursive: true })
+              .then(() => {
+                  console.log('Folder deleted successfully');
+              })
+              .catch((error) => {
+                  console.error('Error deleting folder:', error);
+              });
+  
+            return true;
+        } catch (error) {
+            console.error('Failed to delete folder:', error);
+            return new BadRequestException('Failed to delete folder.');
+        }
+    } else {
+        return new BadRequestException('Folder does not exist.');
+    }
+  }
+}
     /*
   @UseInterceptors(FilesInterceptor('file'))
   async uploadFile(
@@ -101,5 +124,4 @@ export class FilesController {
   remove(@Param('id') id: string) {
     return this.filesService.remove(+id);
   }*/
-}
 

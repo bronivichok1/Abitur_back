@@ -62,7 +62,6 @@ export class UserService {
 
   }
 
-  
   async findOne(number:string,date_of_issue:string) {
     return await this.userRepository.findOne({
       where:{
@@ -71,11 +70,11 @@ export class UserService {
       }});
   }
 
-
-
   async update(id:number,updateUserDto:UpdateUserDto) { 
     return await this.userRepository.update(id,updateUserDto)
   }
 
-
+  async delete(id:number) { 
+    return await this.userRepository.delete(id)
+  }
 }
