@@ -50,11 +50,11 @@ export class FilesController {
               return cb(null, false);
           }
           cb(null, true);
-      }
+          return HttpCode(200)
+      } 
   }))
   
   async UploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Body() requestBody: any) {
- 
   }
   @Post('delete/:nameFolder/:fileName') 
   async deleteFile(@Param('nameFolder') nameFolder: string, @Param('fileName') fileName: string) {
@@ -74,23 +74,15 @@ export class FilesController {
 
     if (fs.existsSync(folderPath)) {
         try {
-            fs.promises.rm(folderPath, { recursive: true })
-              .then(() => {
-                  console.log('Folder deleted successfully');
-              })
-              .catch((error) => {
-                  console.error('Error deleting folder:', error);
-              });
-  
+            await fs.promises.rm(folderPath, { recursive: true });
             return true;
         } catch (error) {
-            console.error('Failed to delete folder:', error);
-            return new BadRequestException('Failed to delete folder.');
+            throw new NotFoundException();
         }
     } else {
-        return new BadRequestException('Folder does not exist.');
+        throw new NotFoundException();
     }
-  }
+}
 }
 
 
