@@ -11,7 +11,6 @@ export class UserService {
   userService: any;
   constructor(
     @InjectRepository(UserData) private readonly userRepository: Repository<UserData>,
-    /*private readonly jwtService:JwtService*/
     ){}
   async create(createUserDto: CreateUserDto) {
    const existUser=await this.userRepository.findOne({
@@ -57,8 +56,7 @@ export class UserService {
       nameFolder:createUserDto.nameFolder,
     })
     console.log(user)
-    /*const token= this.jwtService.sign({number:createUserDto.number})*/
-    return user/*,token*/;
+    return user;
 
   }
 

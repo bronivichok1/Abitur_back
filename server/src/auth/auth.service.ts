@@ -7,7 +7,6 @@ export class AuthService {
 
     constructor(
         private readonly userService:UserService,    
-        /*private readonly jwtService: JwtService*/
         )
     {}
 
@@ -15,16 +14,8 @@ export class AuthService {
         const user = await this.userService.findOne(number, date_of_issue);
         if (user) {
             return user
-        }        // TODO: Generate a JWT and return it here
-        // instead of the user object
+        }        
         throw new NotFoundException({error:'3'})
       }
 
-/*
-      async login(user: iUser) {
-        const {id, number, date_of_expiry}=user
-        return {
-          id, number, date_of_expiry,token:this.jwtService.sign({id:user.id,number:user.number,date_of_expiry:user.date_of_expiry})
-        };
-}*/
-}
+    }

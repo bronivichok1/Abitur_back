@@ -14,7 +14,6 @@ import { Repository } from 'typeorm';
 export class FilesService {
   constructor(
     @InjectRepository(UserData) private readonly userRepository: Repository<UserData>,
-    /*private readonly jwtService:JwtService*/
     ){}
   async findByNumber(number: string,date_of_issue:string) {
     const exUser= await this.userRepository.findOne({

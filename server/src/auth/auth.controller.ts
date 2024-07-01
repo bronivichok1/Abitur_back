@@ -14,7 +14,7 @@ export class AuthController {
      @Post('login')
      @UseGuards(LocalAuthGuard)
   async login(@Request() req) {
-    return /*this.authService.login(*/req.user/*)*/;
+    return req.user;
   }
   @Get(':folderName')
   async getFileNamesFromFolder(@Param('folderName') folderName: string, @Res() res: Response) {
@@ -29,13 +29,4 @@ export class AuthController {
           }
       });
   }
-  
-  
-  /* Защищённый токином роут
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
-  }
-  */
 }
