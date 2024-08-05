@@ -34,10 +34,11 @@ export class FilesController {
           filename: (req, file, cb) => {
             const iconv = require('iconv-lite');
             const slugify = require('slugify');
-            const name = Buffer.from(file.originalname, 'latin1').toString('utf8');
+            const nameFirst = Buffer.from(file.originalname, 'latin1').toString('utf8'); 
+            const name=nameFirst.substring(0, 50);
             const fileExtension = file.originalname.split('.').pop();
             const timestamp = Date.now();
-            const sanitizedFileName = slugify(name, { lower: false }); 
+            const sanitizedFileName = slugify(name, { lower: false });
             const newFileName = `${sanitizedFileName}_${timestamp}.${fileExtension}`;
             const utf8FileName = iconv.encode(newFileName, 'utf8');
             cb(null, utf8FileName.toString());
